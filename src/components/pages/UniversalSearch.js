@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import UserList from "./user/UserList";
+import DeviceList from "./devices/DeviceList";
 import OrganizationList from "./organization/OrganizationList";
 import asyncAPICall from "../../util/apiWrapper";
 import useDebounce from "../../hooks/useDebounce";
@@ -15,6 +16,7 @@ export default function UniversalSearch(props) {
   const results = useRef(false);
 
   const [organizations, setOrganizations] = useState([]);
+  const [devices, setDevices] = useState([]);
   const [users, setUsers] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -37,6 +39,7 @@ export default function UniversalSearch(props) {
 
             setOrganizations(data.organizations);
             setUsers(data.users);
+            setDevices(data.devices);
             setIsSearching(false);
           },
           (err) => {
@@ -74,6 +77,20 @@ export default function UniversalSearch(props) {
           showAddButton="false"
           columns="first_name,last_name,email,phone,active"
           userList={users}
+        />
+      );
+    }
+    return false;
+  };
+
+  const renderDevices = () => {
+    if (devices.length) {
+      return (
+        <DeviceList
+          showFilter="false"
+          showAddButton="false"
+          columns="device_id,serial_number,enrollment_status,last_seen,dep_profile_status"
+          deviceList={devices}
         />
       );
     }
@@ -123,6 +140,7 @@ export default function UniversalSearch(props) {
         <>
           <div className="organizations">{renderOrganizations()}</div>
           <div className="users">{renderUsers()}</div>
+          <div className="devices">{renderDevices()}</div>
         </>
       ) : (
         <h4 className="no-results">There are no records to display</h4>

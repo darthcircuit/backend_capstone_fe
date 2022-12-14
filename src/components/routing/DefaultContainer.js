@@ -9,6 +9,7 @@ import User from "../pages/user/UserGet";
 import OrganizationListPage from "../pages/organization/OrganizationListPage";
 import OrganizationForm from "../pages/organization/OrganizationForm";
 import UserListPage from "../pages/user/UserListPage";
+import DeviceListPage from "../pages/devices/DeviceListPage";
 import UserForm from "../pages/user/UserForm";
 import Loading from "../../util/Loading";
 import ProfileEditPage from "../pages/ProfileEditPage";
@@ -79,6 +80,7 @@ const DefaultContainer = (props) => {
         <Route path="/home" component={Home} />
 
         <Route path="/users" component={UserListPage} />
+        <Route path="/devices" component={DeviceListPage} />
         <Route exact path="/user-add" component={UserForm} />
         <Route path="/user-add/:org_id/:org_name" component={UserForm} />
         <Route path="/user/:user_id" component={User} />

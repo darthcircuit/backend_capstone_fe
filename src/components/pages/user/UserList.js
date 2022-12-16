@@ -184,6 +184,7 @@ const UserList = (props) => {
 
   return (
     <div className="user-list-container list-page">
+      <div className="seperator" />
       <div className="button-and-search">
         <SecurityWrapper restrict_roles="user">
           {!props.showAddButton || props.showAddButton === false ? (
@@ -209,8 +210,6 @@ const UserList = (props) => {
           />
         ) : null}
       </div>
-
-      <div className="seperator" />
 
       <DataTable
         columns={selectedColumns}

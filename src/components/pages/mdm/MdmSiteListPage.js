@@ -1,9 +1,9 @@
-import DeviceList from "./DeviceList";
+import MdmSiteList from "./MdmSiteList";
 import Cookies from "js-cookie";
 import SecurityWrapper from "../../auth/SecurityWrapper";
 import logout from "../../../util/logout";
-import MdmSiteList from "../mdm/MdmSiteList";
-export default function DeviceListPage(props) {
+
+export default function MdmSiteListPage(props) {
   const authToken = Cookies.get("auth_token");
   if (!authToken) {
     //props.history.push('/login');
@@ -11,22 +11,13 @@ export default function DeviceListPage(props) {
   }
 
   return (
-    <div className="asset-container">
+    <div className="list-container">
       <SecurityWrapper roles="super-admin,admin">
-        <div>
-          <MdmSiteList {...props} authToken={authToken} />
-        </div>
-        <br />
-        <hr style={{ opacity: 0.2 }} />
-        <br />
-        <br />
-        <div>
-          <DeviceList {...props} authToken={authToken} />
-        </div>
+        <MdmSiteList {...props} authToken={authToken} />
       </SecurityWrapper>
 
       {/* <SecurityWrapper roles="user">
-        <DeviceList
+        <AssetList
           {...props}
           authToken={authToken}
           columns="first_name,last_name,email,phone,active"

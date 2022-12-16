@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ConfirmDelete from "../../modals/ConfirmDelete";
 import EditTitle from "../../custom-components/EditTitle";
 import UserList from "../user/UserList";
+import AssetSiteList from "../assets/AssetSiteList";
+import MdmSiteList from "../mdm/MdmSiteList";
 import { validateUUID, formatPhone } from "../../../util/stringUtils";
 import { successfulToast } from "../../../util/toastNotifications";
 import SecurityWrapper from "../../auth/SecurityWrapper";
@@ -188,8 +190,34 @@ export default function GetOrganization(props) {
                 </div>
               </div>
             </div>
-
             <br />
+            <div className="mdmsite-list">
+              <AssetSiteList
+                {...props}
+                disableAddUser={!organization.active}
+                showFilter="false"
+                columns="name,url,api_token,edit_button"
+                // org_name={orgName}
+                // org_id={props.match.params.org_id}
+                // userList={users}
+              />
+              <br />
+              <br />
+            </div>
+
+            <div>
+              <MdmSiteList
+                {...props}
+                disableAddUser={!organization.active}
+                showFilter="false"
+                columns="name,url,api_token,edit_button"
+                // org_name={orgName}
+                // org_id={props.match.params.org_id}
+                // userList={users}
+              />
+              <br />
+              <br />
+            </div>
 
             <div className="user-list">
               <UserList

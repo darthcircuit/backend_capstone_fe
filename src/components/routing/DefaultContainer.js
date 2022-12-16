@@ -4,17 +4,27 @@ import Cookies from "js-cookie";
 
 import Home from "../pages/Home";
 import Header from "../navigation/Header";
+
 import Organization from "../pages/organization/OrganizationGet";
-import User from "../pages/user/UserGet";
 import OrganizationListPage from "../pages/organization/OrganizationListPage";
 import OrganizationForm from "../pages/organization/OrganizationForm";
+
+import User from "../pages/user/UserGet";
 import UserListPage from "../pages/user/UserListPage";
-import DeviceListPage from "../pages/devices/DeviceListPage";
 import UserForm from "../pages/user/UserForm";
+
+import DeviceListPage from "../pages/devices/DeviceListPage";
+
+import AssetListPage from "../pages/assets/AssetListPage";
+import AssetSiteListPage from "../pages/assets/AssetSiteListPage";
+import AssetSiteForm from "../pages/assets/AssetSiteForm";
+
+import MdmSiteListPage from "../pages/mdm/MdmSiteListPage";
+import MdmSiteForm from "../pages/mdm/MdmSiteForm";
+
 import Loading from "../../util/Loading";
 import ProfileEditPage from "../pages/ProfileEditPage";
 import UniversalSearch from "../pages/UniversalSearch";
-
 import logout from "../../util/logout";
 import awaitAPICall from "../../util/apiWrapper";
 import useAbortEffect from "../../hooks/useAbortEffect";
@@ -80,12 +90,30 @@ const DefaultContainer = (props) => {
         <Route path="/home" component={Home} />
 
         <Route path="/users" component={UserListPage} />
-        <Route path="/devices" component={DeviceListPage} />
         <Route exact path="/user-add" component={UserForm} />
         <Route path="/user-add/:org_id/:org_name" component={UserForm} />
         <Route path="/user/:user_id" component={User} />
         <Route path="/user/edit/:user_id" component={UserForm} />
         <Route path="/profile/edit/:user_id" component={ProfileEditPage} />
+
+        <Route path="/devices" component={DeviceListPage} />
+
+        <Route path="/assets" component={AssetListPage} />
+        <Route path="/asset-sites" component={AssetSiteListPage} />
+        <Route exact path="/assetsite-form" component={AssetSiteForm} />
+        <Route
+          exact
+          path="/assetsite-form/edit/:site_id"
+          component={AssetSiteForm}
+        />
+
+        <Route path="/mdmsites" component={MdmSiteListPage} />
+        <Route exact path="/mdmsite-form" component={MdmSiteForm} />
+        <Route
+          exact
+          path="/mdmsite-form/edit/:mdm_site_id"
+          component={MdmSiteForm}
+        />
 
         <Route exact path="/organization-form" component={OrganizationForm} />
         <Route path="/organization-form/:org_id" component={OrganizationForm} />

@@ -2,8 +2,7 @@ import { useState, useCallback } from "react";
 // import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMdmSync, useDepSync } from "./DeviceSync.js";
-
+import { useMdmSync } from "../devices/DeviceSync.js";
 import ActiveBadge from "../../custom-components/ActiveBadge";
 // import { formatPhone } from "../../../util/stringUtils";
 // import SecurityWrapper from "../../auth/SecurityWrapper";
@@ -13,9 +12,9 @@ import useDeepEffect from "../../../hooks/useDeepEffect.js";
 import useAbortEffect from "../../../hooks/useAbortEffect.js";
 
 const columns = {
-  device_id: {
-    name: "Device ID",
-    selector: "device_id",
+  asset_id: {
+    name: "Asset ID",
+    selector: "asset_id",
     sortable: true,
   },
   serial_number: {
@@ -24,42 +23,60 @@ const columns = {
     sortable: true,
     width: "150px",
   },
-  enrollment_status: {
-    name: "Enrollment Status",
-    selector: "enrollment_status",
+  site_id: {
+    name: "Site ID",
+    selector: "site_id",
+    sortable: true,
+  },
+  make: {
+    name: "Make",
+    selector: "make",
+    sortable: true,
+  },
+  model_num: {
+    name: "Model Number",
+    selector: "model_num",
     sortable: true,
     width: "150px",
-    cell: (row) => <ActiveBadge active={row.enrollment_status} />,
   },
-  last_seen: {
-    name: "Last Seen",
-    selector: "last_seen",
+  model_name: {
+    name: "Model Name",
+    selector: "model_name",
+    sortable: true,
+    width: "150px",
+  },
+  deployed: {
+    name: "Asset Deployed",
+    selector: "deployed",
+    sortable: true,
+    cell: (row) => <ActiveBadge active={row.deployed} />,
+  },
+  assigned_to: {
+    name: "Assigned To",
+    selector: "assigned_to",
     sortable: true,
     width: "250px",
   },
-  dep_profile_status: {
-    name: "DEP Profile Status",
-    selector: "dep_profile_status",
+  asset_tag: {
+    name: "Asset Tag",
+    selector: "asset_tag",
     sortable: true,
-    width: "150px",
-    cell: (row) => <ActiveBadge active={row.dep_profile_status} />,
   },
 };
 
-const DeviceList = (props) => {
+const AssetList = (props) => {
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [list, setList] = useState([]);
   const [filterText, setFilterText] = useState("");
   const [filteredList, setFilteredList] = useState([]);
-  const [syncButtonText, DepSync, syncButtonDisable] = useDepSync();
   const [syncMdmButtonText, MdmSync, syncMdmButtonDisable] = useMdmSync();
   const loadResults = useCallback(
     (signal) => {
-      if (props.deviceList) {
+      if (props.assetList) {
         setFilterText("");
-        setFilteredList(props.filteredList || props.deviceList);
+        setFilteredList(props.filteredList || props.assetList);
       } else {
-        let fetchUrl = "/devices/get";
+        let fetchUrl = "/assets/get";
 
         // if (props.org_id) {
         //   fetchUrl = `/user/get/organization/${props.org_id}`;
@@ -77,7 +94,7 @@ const DeviceList = (props) => {
           },
           (err) => {
             if (!signal.aborted) {
-              console.error("Error in Get Devices Effect: ", err);
+              console.error("Error in Get Assets Effect: ", err);
             }
           },
           signal
@@ -120,11 +137,13 @@ const DeviceList = (props) => {
       });
     } else {
       selectedColumns = [
-        columns.device_id,
+        columns.asset_tag,
         columns.serial_number,
-        columns.enrollment_status,
-        columns.last_seen,
-        columns.dep_profile_status,
+        columns.make,
+        columns.model_name,
+        columns.model_num,
+        columns.deployed,
+        columns.assigned_to,
       ];
     }
 
@@ -139,24 +158,12 @@ const DeviceList = (props) => {
     (signal) => {
       loadResults(signal);
     },
-    [props.deviceList, loadResults]
+    [props.assetList, loadResults]
   );
 
   return (
-    <div className="device-list-container list-page">
+    <div className="asset-list-container list-page">
       <div className="button-and-search">
-        {/* <SecurityWrapper restrict_roles="user">
-            {!props.showAddButton || props.showAddButton === false ? (
-              <button
-                disabled={props.disableAddUser}
-                // onClick={() => props.history.push(linkToAddUser)}
-                className="confirm-button"
-              >
-                <FontAwesomeIcon icon="fas fa-plus" className="button-icon" />
-                Add New User
-              </button>
-            ) : null}
-          </SecurityWrapper> */}
         {!props.showFilter || props.showFilter === false ? (
           <input
             id="search"
@@ -175,24 +182,18 @@ const DeviceList = (props) => {
         >
           {syncMdmButtonText}
         </button>
-        <button
-          className="confirm-button"
-          disabled={syncButtonDisable}
-          onClick={DepSync}
-          style={{ width: "250px" }}
-        >
-          {syncButtonText}
-        </button>{" "}
       </div>
 
-      <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
+      {/* <div style={{ display: "flex", justifyContent: "flex-end" }}></div> */}
+
+      <div className="seperator" />
       <DataTable
         columns={selectedColumns}
         data={filteredList}
         title={
           <span>
-            <FontAwesomeIcon icon="fa-solid fa-laptop-code" /> Devices <br />
+            <FontAwesomeIcon icon="fa-solid fa-laptop-code" /> Assets Owned{" "}
+            <br />
             {/* This Button will refresh the page:
             
             <button onClick={() => window.location.reload(false)}>
@@ -207,4 +208,4 @@ const DeviceList = (props) => {
   );
 };
 
-export default DeviceList;
+export default AssetList;

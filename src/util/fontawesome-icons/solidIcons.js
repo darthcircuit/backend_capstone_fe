@@ -27,6 +27,8 @@ import {
   faMagnifyingGlass,
   faX,
   faLaptopCode,
+  faSitemap,
+  faBarsProgress,
 } from "@fortawesome/free-solid-svg-icons";
 
 const solidIcons = () => {
@@ -56,7 +58,10 @@ const solidIcons = () => {
     faBuilding,
     faMagnifyingGlass,
     faX,
-    faLaptopCode
+    faLaptopCode,
+    faSitemap,
+    faBars,
+    faBarsProgress
   );
 };
 

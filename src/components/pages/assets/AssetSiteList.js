@@ -27,7 +27,7 @@ const columns = {
     name: "Base URL",
     selector: "url",
     sortable: false,
-    width: "300px",
+    width: "200px",
   },
   org_id: {
     name: "Organization ID",
@@ -36,27 +36,42 @@ const columns = {
   },
   api_token: {
     name: "API Token",
-    selector: "api_token",
     sortable: false,
-    width: "200px",
+    cell: (row) => <div>Hidden</div>,
   },
 
-  // active: {
-  //   name: "Active",
-  //   selector: "active",
-  //   sortable: true,
-  //   cell: (row) => <ActiveBadge active={row.active} />,
-  //   width: "150px",
-  // },
   edit_button: {
     name: "",
     sortable: false,
     cell: (row) => (
-      <Link to={{ pathname: `/assetsite-form/edit/${row.site_id}` }}>
-        <button className="confirm-button">Edit</button>
-      </Link>
+      <div className="delete-edit-buttons" style={{ display: "flex" }}>
+        <div>
+          <Link to={{ pathname: `/assetsite-form/edit/${row.site_id}` }}>
+            <button
+              className="confirm-button"
+              style={{ width: "65px", marginRight: "2px" }}
+            >
+              Edit
+            </button>
+          </Link>
+        </div>
+        <div>
+          {" "}
+          <Link to={{ pathname: `/asset_site/del/${row.site_id}` }}>
+            <button
+              className="confirm-button"
+              style={{
+                width: "80px",
+                backgroundColor: "#FF5F5F",
+                marginLeft: "2px",
+              }}
+            >
+              Delete
+            </button>
+          </Link>
+        </div>
+      </div>
     ),
-    width: "150px",
   },
 };
 

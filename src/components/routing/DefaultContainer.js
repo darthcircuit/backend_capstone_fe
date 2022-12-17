@@ -18,9 +18,11 @@ import DeviceListPage from "../pages/devices/DeviceListPage";
 import AssetListPage from "../pages/assets/AssetListPage";
 import AssetSiteListPage from "../pages/assets/AssetSiteListPage";
 import AssetSiteForm from "../pages/assets/AssetSiteForm";
+import AssetSiteDel from "../pages/assets/AssetSiteDel";
 
 import MdmSiteListPage from "../pages/mdm/MdmSiteListPage";
 import MdmSiteForm from "../pages/mdm/MdmSiteForm";
+import MdmSiteDel from "../pages/mdm/MdmSiteDel";
 
 import Loading from "../../util/Loading";
 import ProfileEditPage from "../pages/ProfileEditPage";
@@ -106,6 +108,7 @@ const DefaultContainer = (props) => {
           path="/assetsite-form/edit/:site_id"
           component={AssetSiteForm}
         />
+        <Route exact path="/asset_site/del/:site_id" component={AssetSiteDel} />
 
         <Route path="/mdmsites" component={MdmSiteListPage} />
         <Route exact path="/mdmsite-form" component={MdmSiteForm} />
@@ -114,6 +117,8 @@ const DefaultContainer = (props) => {
           path="/mdmsite-form/edit/:mdm_site_id"
           component={MdmSiteForm}
         />
+
+        <Route exact path="/mdmsite/del/:mdm_site_id" component={MdmSiteDel} />
 
         <Route exact path="/organization-form" component={OrganizationForm} />
         <Route path="/organization-form/:org_id" component={OrganizationForm} />

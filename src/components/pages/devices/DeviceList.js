@@ -13,9 +13,9 @@ import useDeepEffect from "../../../hooks/useDeepEffect.js";
 import useAbortEffect from "../../../hooks/useAbortEffect.js";
 
 const columns = {
-  device_id: {
-    name: "Device ID",
-    selector: "device_id",
+  asset_tag: {
+    name: "Asset Tag",
+    selector: "asset.asset_tag",
     sortable: true,
   },
   serial_number: {
@@ -25,12 +25,20 @@ const columns = {
     width: "150px",
   },
   enrollment_status: {
-    name: "Enrollment Status",
+    name: "MDM Enrollment Status",
     selector: "enrollment_status",
     sortable: true,
     width: "150px",
     cell: (row) => <ActiveBadge active={row.enrollment_status} />,
   },
+  assigned_to: {
+    name: "Assigned To",
+    selector: "asset.assigned_to",
+    sortable: true,
+    // width: "150px",
+    // cell: (row) => <ActiveBadge active={row.enrollment_status} />,
+  },
+
   last_seen: {
     name: "Last Seen",
     selector: "last_seen",
@@ -120,8 +128,9 @@ const DeviceList = (props) => {
       });
     } else {
       selectedColumns = [
-        columns.device_id,
+        columns.asset_tag,
         columns.serial_number,
+        columns.assigned_to,
         columns.enrollment_status,
         columns.last_seen,
         columns.dep_profile_status,
@@ -192,7 +201,8 @@ const DeviceList = (props) => {
         data={filteredList}
         title={
           <span>
-            <FontAwesomeIcon icon="fa-solid fa-laptop-code" /> Devices <br />
+            <FontAwesomeIcon icon="fa-solid fa-laptop-code" /> Enrolled Devices{" "}
+            <br />
             {/* This Button will refresh the page:
             
             <button onClick={() => window.location.reload(false)}>

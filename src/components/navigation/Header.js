@@ -40,7 +40,7 @@ const Header = (props) => {
         </NavLink>
 
         <NavLink to="/devices">
-          <div className="page-link nav-item">Devices</div>
+          <div className="page-link nav-item">MDM Enrolled Devices</div>
         </NavLink>
         <NavLink to="/assets">
           <div className="page-link nav-item">Assets</div>

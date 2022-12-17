@@ -27,54 +27,49 @@ const columns = {
     name: "Base URL",
     selector: "url",
     sortable: false,
-    width: "300px",
-  },
-  org_id: {
-    name: "Organization ID",
-    selector: "org_id",
-    sortable: false,
-  },
-  api_token: {
-    name: "API Token",
-    selector: "api_token",
-    sortable: false,
     width: "200px",
   },
 
-  // active: {
-  //   name: "Active",
-  //   selector: "active",
-  //   sortable: true,
-  //   cell: (row) => <ActiveBadge active={row.active} />,
-  //   width: "150px",
-  // },
+  api_token: {
+    name: "API Token",
+    sortable: false,
+    cell: (row) => <div>Hidden</div>,
+  },
+
   edit_button: {
     name: "",
     sortable: false,
     cell: (row) => (
-      <Link to={{ pathname: `/mdmsite-form/edit/${row.mdm_site_id}` }}>
-        <button className="confirm-button" style={{}}>
-          Edit
-        </button>
-      </Link>
+      <div className="delete-edit-buttons" style={{ display: "flex" }}>
+        <div>
+          <Link to={{ pathname: `/mdmsite-form/edit/${row.mdm_site_id}` }}>
+            <button
+              className="confirm-button"
+              style={{ width: "65px", marginRight: "2px" }}
+            >
+              Edit
+            </button>
+          </Link>
+        </div>
+        <div>
+          {" "}
+          <Link to={{ pathname: `/mdmsite/del/${row.mdm_site_id}` }}>
+            <button
+              className="confirm-button"
+              style={{
+                width: "80px",
+                backgroundColor: "#FF5F5F",
+                marginLeft: "2px",
+              }}
+            >
+              Delete
+            </button>
+          </Link>
+        </div>
+      </div>
     ),
-    // width: "150px",
   },
-  del_button: {
-    name: "",
-    sortable: false,
-    cell: (row) => (
-      <Link to={{ pathname: `/mdmsite/delete/${row.mdm_site_id}` }}>
-        <button
-          className="confirm-button"
-          style={{ backgroundColor: "#FF0000" }}
-        >
-          Delete
-        </button>
-      </Link>
-    ),
-    // width: "150px",
-  },
+  width: "200px",
 };
 
 const MdmSiteList = (props) => {
@@ -124,11 +119,9 @@ const MdmSiteList = (props) => {
       selected = [
         columns.name,
         columns.url,
-        columns.org_id,
         columns.api_token,
-        // columns.active,
         columns.edit_button,
-        columns.del_button,
+        // columns.del_button,
       ];
     }
     setSelectedColumns(selected);
@@ -159,7 +152,7 @@ const MdmSiteList = (props) => {
     <div className="asset-container">
       <div className="seperator" />
       <div className="button-and-search">
-        {!props.showFilter || props.showFilter === false ? (
+        {/* {!props.showFilter || props.showFilter === false ? (
           <input
             id="search"
             className="org-filter"
@@ -168,7 +161,7 @@ const MdmSiteList = (props) => {
             value={filterText}
             onChange={handleFilter}
           />
-        ) : null}
+        ) : null} */}
         {!props.showAddButton || props.showAddButton === false ? (
           <Link to="/mdmsite-form">
             <button className="confirm-button">
@@ -183,9 +176,9 @@ const MdmSiteList = (props) => {
         columns={selectedColumns}
         data={filteredList}
         title={
-          <span>
+          <h2>
             <FontAwesomeIcon icon="fas fa-bars-progress" /> MicroMDM Sites
-          </span>
+          </h2>
         }
       />
     </div>

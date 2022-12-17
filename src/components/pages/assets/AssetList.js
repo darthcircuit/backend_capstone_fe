@@ -62,6 +62,13 @@ const columns = {
     selector: "asset_tag",
     sortable: true,
   },
+  enrollment_status: {
+    name: "MDM Enrollment Status",
+    selector: "enrolled.enrollment_status",
+    sortable: true,
+    width: "150px",
+    cell: (row) => <ActiveBadge active={row.enrollment_status} />,
+  },
 };
 
 const AssetList = (props) => {
@@ -138,12 +145,13 @@ const AssetList = (props) => {
     } else {
       selectedColumns = [
         columns.asset_tag,
+        columns.deployed,
+        columns.assigned_to,
         columns.serial_number,
         columns.make,
         columns.model_name,
         columns.model_num,
-        columns.deployed,
-        columns.assigned_to,
+        // columns.enrollment_status,
       ];
     }
 

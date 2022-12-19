@@ -68,7 +68,7 @@ const LoginPage = (props) => {
   return (
     <div className="login-page-container">
       <div className="login-page-wrapper">
-        <img src={Logo} alt="Logo" height="32px" />
+        <img src={Logo} alt="Logo" height="200px" />
 
         <div className="form-wrapper">
           <h2>Please log in</h2>

@@ -7,10 +7,8 @@
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "i": "^0.3.7",
+    "chart.js": "^4.1.1",
     "js-cookie": "^2.2.1",
-    "npm": "^9.2.0",
-    "or": "^0.2.0",
     "react": "^17.0.1",
     "react-chartjs-2": "^5.0.1",
     "react-data-table-component": "^6.11.7",
@@ -45,8 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "svg-react-loader": "^0.4.6"
   }
 }
